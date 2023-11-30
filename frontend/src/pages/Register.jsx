@@ -63,12 +63,12 @@ function Register() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full bg-white p-8 rounded-md shadow-md">
-        <h1 className="text-2xl font-semibold mb-4 flex items-center">
+    <div className="min-h-screen flex items-center justify-center ">
+      <div className="max-w-md w-full  p-8 rounded-md shadow-md">
+        <h1 className="text-2xl text-white font-semibold mb-4 flex items-center">
           <FaUser className="mr-2" /> Register
         </h1>
-        <p className="text-gray-500 mb-6">Please create an account</p>
+        <p className="text-gray-400 mb-6">Please create an account</p>
         <form onSubmit={onSubmit}>
           <div className="mb-4">
             <input

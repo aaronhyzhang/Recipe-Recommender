@@ -1,3 +1,4 @@
+import React from "react";
 import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,32 +16,38 @@ function Header() {
   };
 
   return (
-    <header className="header">
-      <div className="logo">
-        <Link to="/">Recipe Recommender</Link>
+    <header className="p-2 h-16 border-b border-gray-300">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="text-white text-xl font-bold">
+          <Link to="/">Recipe Recommender</Link>
+        </div>
+
+        <ul className="flex items-center space-x-4">
+          {user ? (
+            <li>
+              <button
+                className="btn text-white hover:text-gray-300"
+                onClick={onLogout}
+              >
+                <FaSignOutAlt className="mr-2" /> Logout
+              </button>
+            </li>
+          ) : (
+            <>
+              <li>
+                <Link to="/login" className="text-white hover:text-gray-300">
+                  <FaSignInAlt className="mr-2" /> Login
+                </Link>
+              </li>
+              <li>
+                <Link to="/register" className="text-white hover:text-gray-300">
+                  <FaUser className="mr-2" /> Register
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
       </div>
-      <ul>
-        {user ? (
-          <li>
-            <button className="btn" onClick={onLogout}>
-              <FaSignOutAlt /> Logout
-            </button>
-          </li>
-        ) : (
-          <>
-            <li>
-              <Link to="/login">
-                <FaSignInAlt /> Login
-              </Link>
-            </li>
-            <li>
-              <Link to="/register">
-                <FaUser /> Register
-              </Link>
-            </li>
-          </>
-        )}
-      </ul>
     </header>
   );
 }
