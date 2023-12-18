@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Home from "./pages/Home"; // Import the new Home component
+import Home from "./pages/Home";
 
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -32,7 +32,7 @@ function App() {
             zIndex: -1,
             backgroundImage: "url('/background.jpeg')",
             backgroundSize: "cover",
-            backgroundPosition: `center ${scrollPosition * 0.5}px`, // Adjust the multiplier for the parallax effect
+            backgroundPosition: `center ${scrollPosition * 0.8}px`, // Adjust the multiplier for the parallax effect
             filter: "brightness(20%)",
           }}
         />

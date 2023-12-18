@@ -1,2 +1,4 @@
 node_modules
 .env
+backend/ML/data/*
+backend/ML/model/cosine_sim.csv

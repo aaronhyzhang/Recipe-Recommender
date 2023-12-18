@@ -36,8 +36,8 @@ function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-blue-500 p-4 text-white">
+    <div className="min-h-screen ">
+      <header className=" w-auto p-4 text-white">
         <div className="container mx-auto">
           <h1 className="text-2xl font-semibold">
             Welcome {user && user.name}
@@ -57,7 +57,7 @@ function Dashboard() {
               ))}
             </div>
           ) : (
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-white">
               You have not added any ingredients.
             </p>
           )}

@@ -16,7 +16,7 @@ function Header() {
   };
 
   return (
-    <header className="p-2 h-16 border-b border-gray-300">
+    <header className="p-2 border-b border-gray-300">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-xl font-bold">
           <Link to="/">Recipe Recommender</Link>
