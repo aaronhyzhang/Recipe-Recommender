@@ -5,11 +5,13 @@ import IngredientForm from "../components/IngredientForm";
 import IngredientItem from "../components/IngredientItem.jsx";
 import Spinner from "../components/Spinner";
 import { getIngredients, reset } from "../features/ingredients/ingredientSlice";
+import RecipeList from "../components/RecipeList.jsx";
 
 function Dashboard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const { recipes } = useSelector((state) => state.recipes);
   const { user } = useSelector((state) => state.auth);
   const { ingredients, isLoading, isError, message } = useSelector(
     (state) => state.ingredients
@@ -48,7 +50,7 @@ function Dashboard() {
 
       <main className="container mx-auto mt-8">
         <IngredientForm />
-
+        <RecipeList recipes={recipes} />
         <section className="mt-8">
           {ingredients.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

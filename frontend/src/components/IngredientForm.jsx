@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { createIngredient } from "../features/ingredients/ingredientSlice";
+import { generateRecipes } from "../features/ingredients/ingredientSlice";
 
 function IngredientForm() {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
 
   const dispatch = useDispatch();
+  const { ingredients } = useSelector((state) => state.ingredients);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +16,14 @@ function IngredientForm() {
     dispatch(createIngredient({ name, quantity }));
     setName("");
     setQuantity("");
+  };
+
+  const onGenerateRecipes = () => {
+    if (ingredients.length === 0) {
+      alert("You have no ingredients. Please add some ingredients first.");
+    } else {
+      dispatch(generateRecipes());
+    }
   };
 
   return (
@@ -52,12 +62,18 @@ function IngredientForm() {
             className="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
-        <div className="mb-4">
+        <div className="flex justify-center px-8 mb-4">
           <button
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 mr-4"
             type="submit"
           >
             Add Ingredient
+          </button>
+          <button
+            className="bg-green-600 text-white py-2 px-8 rounded-md hover:bg-green-600 transition duration-300"
+            onClick={onGenerateRecipes}
+          >
+            Generate Recipes
           </button>
         </div>
       </form>

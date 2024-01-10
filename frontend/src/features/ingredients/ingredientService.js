@@ -41,10 +41,24 @@ const deleteIngredient = async (ingredientId, token) => {
   return response.data;
 };
 
+//Generate recipes using ChatGPT
+const generateRecipes = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.post(API_URL + "generate", {}, config);
+
+  return response.data;
+};
+
 const ingredientService = {
   createIngredient,
   getIngredients,
   deleteIngredient,
+  generateRecipes,
 };
 
 export default ingredientService;

@@ -3,6 +3,7 @@ import ingredientService from "./ingredientService";
 
 const initialState = {
   ingredients: [],
+  recipes: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -66,6 +67,25 @@ export const deleteIngredient = createAsyncThunk(
   }
 );
 
+// Generate recipes using ChatGPT
+export const generateRecipes = createAsyncThunk(
+  "ingredients/generate",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await ingredientService.generateRecipes(token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const ingredientSlice = createSlice({
   name: "ingredient",
   initialState,
@@ -111,6 +131,19 @@ export const ingredientSlice = createSlice({
         );
       })
       .addCase(deleteIngredient.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(generateRecipes.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(generateRecipes.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.recipes = [action.payload];
+      })
+      .addCase(generateRecipes.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
